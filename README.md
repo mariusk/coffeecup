@@ -13,8 +13,6 @@ similar to how it is normally done in Express, like:
     app = express.createServer()
 
     app.configure ->
-      app.use express.bodyParser()
-      app.use express.static("public")
       app.set "views", "srv/testviews"
       app.set "view engine", "coffeecup"
 
@@ -32,6 +30,25 @@ Here's the `index.coffeecup` file used with the code above:
       body ->
         h1 "Coffeecup - Hello world. #{@xyz}"
 
+## Why I'm using Coffeecup?
+
+Over time I've written many systems and have met many templating
+languages. Most of the template languages have been created for making
+markup simple, and even simple programming things typically become
+challenging; including passing variables, doing simple formatting
+inside a template, loops/iteration and more.
+
+Coffeescript's compactness and Javascript's built in data structures
+makes a separate templating language unecessary if you are coding
+in Coffeescript. Good reasons for using other template languages
+may be that your designers or others are able to code it themselves,
+but if you are the one coding most of the designs as well, why not
+stick with something that you know and which can be considered a
+full programming language?
+
+That's the reason I chose Coffeecup for some of my Coffeescript
+based projects. It's almost as compact as for instance Jade, but
+with none of the limitations. 
 
 The rest of the description below is unchanged from @mauricemach :
 
