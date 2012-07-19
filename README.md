@@ -23,6 +23,16 @@ similar to how it is normally done in Express, like:
     app.get "/index", (req, res) ->
       res.render "index", { xyz: Math.random(), cache: on }
 
+Here's the `index.coffeecup` file used with the code above:
+
+    doctype 5
+    html lang: "en", ->
+      head ->
+        title "Coffeecup test"
+      body ->
+        h1 "Coffeecup - Hello world. #{@xyz}"
+
+
 The rest of the description below is unchanged from @mauricemach :
 
 [Fork CoffeeCup on Github](https://github.com/mariusk/coffeecup).
