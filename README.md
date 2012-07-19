@@ -5,9 +5,27 @@
 
 This is a clone of @mauricemach [CoffeeCup](https://github.com/mauricemach/coffeekup).
 
-I am renaming and trying to keep this project alive.
+I've contributed Express 3.0 support, so you are now able to use Coffeecup templates
+similar to how it is normally done in Express, like:
 
-[Fork CoffeeCup on Github](https://github.com/gradus/coffeecup).
+    express = require "express"
+
+    app = express.createServer()
+
+    app.configure ->
+      app.use express.bodyParser()
+      app.use express.static("public")
+      app.set "views", "srv/testviews"
+      app.set "view engine", "coffeecup"
+
+    app.listen 3000
+
+    app.get "/index", (req, res) ->
+      res.render "index", { xyz: Math.random(), cache: on }
+
+The rest of the description below is unchanged from @mauricemach :
+
+[Fork CoffeeCup on Github](https://github.com/mariusk/coffeecup).
 
 CoffeeCup is a templating engine for [node.js](http://nodejs.org) and browsers that lets you to write your HTML templates in 100% pure [CoffeeScript](http://coffeescript.org).
 

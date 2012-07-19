@@ -5,14 +5,14 @@ log = console.log
 {spawn, exec} = require 'child_process'
 
 # ANSI Terminal Colors
-bold = '\033[0;1m'
-green = '\033[0;32m'
-reset = '\033[0m'
-red = '\033[0;31m'
+bold = '\x1b[0;1m'
+green = '\x1b[0;32m'
+reset = '\x1b[0m'
+red = '\x1b[0;31m'
 
 # Internal Functions
 #
-# ## *walk* 
+# ## *walk*
 #
 # **given** string as dir which represents a directory in relation to local directory
 # **and** callback as done in the form of (err, results)
@@ -37,8 +37,8 @@ walk = (dir, done) ->
         results.push file
         done(null, results) unless --pending
 
-# ## *log* 
-# 
+# ## *log*
+#
 # **given** string as a message
 # **and** string as a color
 # **and** optional string as an explaination
@@ -142,4 +142,3 @@ task 'test', ->
   test -> console.log 'Done!'
 
 task 'bench', -> require('./benchmark').run()
-

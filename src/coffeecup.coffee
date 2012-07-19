@@ -229,7 +229,7 @@ skeleton = (data = {}) ->
 
     __cc.render_tag(name, idclass, attrs, contents)
 
-  yield = (f) ->
+  cede = (f) ->
     temp_buffer = []
     old_buffer = __cc.buffer
     __cc.buffer = temp_buffer
@@ -370,6 +370,22 @@ coffeecup.render = (template, data = {}, options = {}) ->
   tpl(data)
 
 unless window?
+
+  # Added Express 3.0 support.
+  fs = require "fs"
+  pathCache = {}
+  TemplateError = @TemplateError
+  express3engine = (path, data, cb) ->
+    if !pathCache[path] or !data.cache
+      data.hardcode ?= {}
+      data.hardcode.partial = ->
+        text @partial.apply @, arguments
+      txt = fs.readFileSync path, "utf8"
+      renderfn = coffeecup.compile txt, data
+      pathCache[path] = renderfn
+    cb null, pathCache[path](data)
+  coffeecup.__express = express3engine
+
   coffeecup.adapters =
     # Legacy adapters for when coffeecup expected data in the `context` attribute.
     simple: coffeecup.render

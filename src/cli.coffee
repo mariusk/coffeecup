@@ -21,7 +21,7 @@ compile = (input_path, output_directory, js, namespace = 'templates') ->
     else
       func = coffeecup.compile contents, options
       output = """
-        (function(){ 
+        (function(){
           this.#{namespace} || (this.#{namespace} = {});
           this.#{namespace}[#{JSON.stringify name}] = #{func};
         }).call(this);
@@ -34,8 +34,8 @@ write = (input_path, name, contents, output_directory, ext) ->
   filename = name + ext
   dir = output_directory or path.dirname input_path
   path.exists dir, (exists) ->
-    unless exists then fs.mkdirSync dir, 0777
-    
+    unless exists then fs.mkdirSync dir, 0o777
+
     output_path = path.join dir, filename
     contents = ' ' if contents.length <= 0
     fs.writeFile output_path, contents, (err) ->
@@ -86,4 +86,3 @@ switches = [
         compile file, options.output, options.js, options.namespace
 
     compile file, options.output, options.js, options.namespace
-
